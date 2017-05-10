@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--BLACK COLOR PALLETES-->
+    <color name="GBL1">#333333</color>
+    <color name="GBL2">#666666</color>
+    <color name="GBL3">#999999</color>
+    <color name="GBL4">#cccccc</color>
+    <color name="GBL4.2">#dbdbdb</color>
+    <color name="GBL4.5">#dddddd</color>
+    <color name="GBL5">#eeeeee</color>
+    <color name="GBL5.5">#f5f6fa</color>
+    <color name="GBL6">#f4f4f4</color>
+
+    <!--ORANGE COLOR PALLETES-->
+    <color name="GO1">#c74b14</color>
+    <color name="GO2">#de5416</color>
+    <color name="GO3">#e96125</color>
+    <color name="GO4">#eb723c</color>
+    <color name="GO5">#ee8353</color>
+    <color name="GO6">#f0936a</color>
+
+    <!--BLUE COLOR PALLETES-->
+    <color name="BLU1">#2c8196</color>
+    <color name="BLU2">#3192aa</color>
+    <color name="BLU3">#37a3be</color>
+    <color name="BLU4">#45afc9</color>
+    <color name="BLU5">#59b7cf</color>
+    <color name="BLU6">#6dc0d5</color>
+    <color name="user_image_color">#e5f4ff</color>
+
+    <!-- Color CVV Checked/Unchecked -->
+    <color name="cvv_unchecked">#fbdfd3</color>
+    <color name="cvv_checked">#e96125</color>
+
+    <color name="GO3_40_percent">#66E96125</color>
+
+    <!-- Optimized -->
+    <color name="actionBarBg">#09142E</color>
+    <color name="darkActionBarBg">#FF071028</color>
+    <color name="grofers_orange">@color/GO3</color>
+    <!--<color name="grofers_orange">@color/GO3</color>-->
+    <color name="grofers_orange_pressed">#b36112</color>
+    <color name="grofers_dark_blue">@color/BLU3</color>
+    <color name="divider_color">@color/GBL5</color>
+    <!-- Added shade white_fcfcfc -->
+    <color name="black">#000000</color>
+    <color name="white_fcfcfc">#FCFCFC</color>
+    <color name="white_opacity">#00FFFFFF</color>
+    <color name="transparent_black">#AA000000</color>
+    <color name="grey_opacity">#33EEEEEE</color>
+    <color name="white">#ffffff</color>
+    <color name="light_green">#00FF8A</color>
+    <color name="grofers_blue">#2C3E50</color>
+    <color name="grey">#D0CECD</color>
+    <color name="transparent_white">#00ffffff</color>
+    <color name="grey_with_80_percent_opacity">#99333333</color>
+    <color name="grey_with_30_percent_opacity">#4D333333</color>
+    <color name="very_light_grey">#CCCCCC</color>
+    <color name="black_333333">#333333</color>
+    <color name="light_grey_666666">#666666</color>
+    <color name="light_grey_999999">#999999</color>
+    <!--<color name="grofers_orange_pressed">#ae441a</color>-->
+    <color name="color_green">#289F2B</color>
+    <color name="color_parrot_green">#2AB84B</color>
+    <color name="color_error_red">#AA9c0808</color>
+    <color name="color_error_message">#fd6464</color>
+    <color name="normal_red">#FF0000</color>
+    <color name="normal_red_light">#CC4C46</color>
+    <color name="color_background_error_red">#33ae1717</color>
+    <color name="color_dark_red">#E74646</color>
+    <color name="text_color_products">#6B7684</color>
+    <color name="color_light_red">#FC7E7E</color>
+    <color name="light_grey_AAAAAA">#AAAAAA</color>
+    <color name="orange_e96125">#E96125</color>
+    <color name="grey_FAFAFA">#FAFAFA</color>
+    <color name="grey_cccccc">#CCCCCC</color>
+    <color name="grey_121518">#121518</color>
+    <color name="white_f8f8f8">#f8f8f8</color>
+    <color name="grey_f9f9f9">#f9f9f9</color>
+    <color name="grey_9d9d9d">#9d9d9d</color>
+    <color name="f5f5f5">#f5f5f5</color>
+    <color name="seperator_color">#D6D7D8</color>
+    <color name="light_grey_99666666">#99666666</color>
+    <color name="pressed_color_transparent">#50FFFFFF</color>
+    <color name="ripple_color_transparent">#50FFFFFF</color>
+    <color name="white_color_ripple">#BB999999</color>
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+
+    <color name="image_border_color">#44000000</color>
+
+    <!-- ActionBar -->
+    <color name="actionBarTextColor">@color/grofers_orange</color>
+    <color name="actionBarBackground">@color/white</color>
+
+    <!-- MerchantName -->
+    <color name="popularTextColor">@color/grofers_orange</color>
+
+    <!-- Merchant List Text Color -->
+    <color name="merchantNameColor">@color/grofers_orange</color>
+    <color name="merchantAddressColor">@color/light_grey_666666</color>
+    <color name="ListItemPressedColor">@color/grey</color>
+    <color name="merchantListSubItemsTextColor">@color/grey</color>
+
+    <color name="categories_color">@color/orange_e96125</color>
+    <color name="merchant_name_in_list_color">@color/black_333333</color>
+    <color name="locality_color_list">@color/light_grey_999999</color>
+    <color name="estimated_time_box">@color/grey_FAFAFA</color>
+
+    <!-- orange_circle.xml -->
+    <color name="orange_circle_color">@color/grofers_orange</color>
+    <color name="orange_circle_border">@color/grey_cccccc</color>
+
+    <!-- splash background -->
+    <color name="splash_background">@color/grey_121518</color>
+    <color name="list_item_pressed">@color/f5f5f5</color>
+    <color name="list_item_normal">@color/white</color>
+    <color name="background_grey_lighter">#e5e6ea</color>
+
+    <!-- Merchant list custom Action bar -->
+    <color name="navigational_drawer">@color/light_grey_99666666</color>
+
+    <!-- Floating Action Button Colors -->
+
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+
+    <!-- Order History -->
+
+    <color name="order_history_date_time">@color/light_grey_999999</color>
+    <color name="order_history_dark_grey">#687180</color>
+    <color name="order_history_grey">@color/seperator_color</color>
+    <color name="order_history_seperator">@color/seperator_color</color>
+    <color name="order_history_seperator_green">@color/color_green</color>
+    <color name="order_history_red">@color/color_error_red</color>
+    <color name="order_history_green">@color/color_green</color>
+
+
+    <!-- Navigation drawer colors -->
+    <color name="location_background_color">#f7f7f7</color>
+    <color name="checkout_button_color">#f7f7f7</color>
+    <color name="cart_checkout_button">@color/grofers_orange</color>
+    <color name="cart_price_background_color">@color/grofers_orange_pressed</color>
+
+    <!--Segmented Radio Button -->
+    <color name="radio_button_selected_color">@color/grofers_orange</color>
+    <color name="radio_button_unselected_color">@android:color/transparent</color>
+
+    <color name="background_tab_pressed">@color/transparent_white</color>
+    <color name="background_out_of_error">@color/white</color>
+
+    <color name="email_edittext">#BFBFBF</color>
+
+
+
+    <color name="progress_bar_highlight">@color/grofers_orange</color>
+    <color name="progress_bar_nohighlight">@color/GBL6</color>
+
+    <color name="referral_seperator_colour">#6dc0d5</color>
+
+    <color name="fb_colour">#375794</color>
+    <color name="whatsapp_colour">#37be3c</color>
+    <color name="whatsapp_colour_clicked">#31aa35</color>
+    <color name="sms_colour">#27ae5f</color>
+    <color name="share_colour">#3eb8d7</color>
+    <color name="tint">#99000000</color>
+
+    <!--Google Sign In-->
+    <color name="blue_grey_500">#607D8B</color>
+    <color name="blue_grey_600">#546E7A</color>
+    <color name="blue_grey_700">#455A64</color>
+    <color name="blue_grey_800">#37474F</color>
+    <color name="blue_grey_900">#263238</color>
+
+
+</resources>

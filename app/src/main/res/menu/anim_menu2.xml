@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/rotate_launch_II"
+        android:enabled="true"
+        android:icon="@drawable/app_logo"
+        android:title="Rotate Launch 2.0"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/fly_with_doge"
+        android:enabled="true"
+        android:icon="@drawable/app_logo"
+        android:title="Fly with Doge"
+        app:showAsAction="ifRoom" />
+
+
+
+</menu>

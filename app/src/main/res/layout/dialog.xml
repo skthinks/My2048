@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/curved_edge_border"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_dialogtwobutton_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:textColor="@color/GBL1"
+        android:textSize="14sp"
+        android:visibility="visible"
+        android:text="Starset Society"/>
+
+    <TextView
+        android:id="@+id/text_dialogtwobutton_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp"
+        android:textColor="@color/GBL1"
+        android:textSize="14sp"
+        android:text="Are you sure you want make this Transmission? Seriously?"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_all_fcfcfc_curved"
+        android:divider="@drawable/divider_vertical"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/button_dialogtwobutton_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/GBL2"
+            android:textSize="12sp"
+            android:text="No"/>
+
+        <TextView
+            android:id="@+id/button_dialogtwobutton_yes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/grofers_orange"
+            android:textSize="12sp"
+            android:text="Yes"/>
+
+    </LinearLayout>
+</LinearLayout>

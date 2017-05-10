@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.grofers.skthinks.my2048">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="2048"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme2">
+
+        <activity android:name=".View.SplasherActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".View.MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <service android:name=".TimeTicker" />
+
+        <activity android:name=".View.AnimationActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".View.AnimationChoiceActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".View.HighScoresActivity"
+            android:screenOrientation="portrait">
+        </activity>
+    </application>
+
+</manifest>

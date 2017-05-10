@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/linear_launch"
+        android:enabled="true"
+        android:icon="@drawable/app_logo"
+        android:title="Linear"
+        android:titleCondensed="LL"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/spin"
+        android:enabled="true"
+        android:icon="@drawable/app_logo"
+        android:title="Spin"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/accelerate"
+        android:enabled="true"
+        android:icon="@drawable/app_logo"
+        android:title="Accelerate"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/linear_rotate_launch"
+        android:enabled="true"
+        android:icon="@drawable/app_logo"
+        android:title="Rotate Launch"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/background_color_change"
+        android:enabled="true"
+        android:icon="@drawable/app_logo"
+        android:title="Background Colour"
+        app:showAsAction="always" />
+
+
+</menu>
