@@ -9,6 +9,9 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SomethingTest {
 
@@ -38,6 +41,9 @@ public class SomethingTest {
 		testObjFields.setName("String");
 		testObjFields.setDucks(1);
 		testSomething.setObjFields(testObjFields);
+		List<ObjFields>testObjFieldsList = new ArrayList<>();
+		testObjFieldsList.add(testObjFields);
+		testSomething.setObjFieldsList(testObjFieldsList);
 
 
         // Obtain a Parcel object and write the parcelable object to it:

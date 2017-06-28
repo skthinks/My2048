@@ -18,6 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ObjFields implements Parcelable {
 
+    AnotherClass somethingElse;
+
     int total;
 
     String name;
@@ -28,6 +30,7 @@ public class ObjFields implements Parcelable {
         this.total = in.readInt();
         this.name = in.readString();
         this.ducks = in.readInt();
+        this.somethingElse = in.readParcelable(AnotherClass.CREATOR.getClass().getClassLoader());
     }
 
     @Override
@@ -35,6 +38,7 @@ public class ObjFields implements Parcelable {
         dest.writeInt(total);
         dest.writeString(name);
         dest.writeInt(ducks);
+        dest.writeParcelable(somethingElse, flags);
     }
 
     @Override

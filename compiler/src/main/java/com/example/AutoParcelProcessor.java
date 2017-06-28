@@ -32,6 +32,13 @@ public final class AutoParcelProcessor extends AbstractProcessor {
 
     String testClassParentInstance;
 
+    private static final String DEFAULT_STRING = "default_string";
+
+    private static final int DEFAULT_NUMBER = 1;
+
+    private static final char DEFAULT_CHAR = 'A';
+
+
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         annotatedElements = roundEnv.getElementsAnnotatedWith(AutoParcel.class);
@@ -40,15 +47,15 @@ public final class AutoParcelProcessor extends AbstractProcessor {
         types.addAll(ElementFilter.typesIn(annotatedElements));
 
 
-        for (Element annotatedElement : annotatedElements){
+        for (final Element annotatedElement : annotatedElements){
             final String elementName = annotatedElement.getSimpleName().toString();
             defaultValueStatements = new ArrayList<>();
             toImport = new ArrayList<>();
 
-            toImport.add("import android.os.Parcel;");
-            toImport.add("import " + getClassName(annotatedElement)+";");
-            toImport.add("import junit.framework.Assert;");
-            toImport.add("import org.junit.Test;");
+            checkAndAddStatement(toImport, "import android.os.Parcel;");
+            checkAndAddStatement(toImport, "import " + getClassName(annotatedElement)+";");
+            checkAndAddStatement(toImport, "import junit.framework.Assert;");
+            checkAndAddStatement(toImport, "import org.junit.Test;");
 
             String testClassInstanceName = "test"+annotatedElement.getSimpleName().toString();
             testClassParentInstance = testClassInstanceName;
@@ -61,7 +68,6 @@ public final class AutoParcelProcessor extends AbstractProcessor {
                 String name = elementName;
                 Object defaultInstanceValues = defaultValueStatements;
                 Object imports = toImport;
-
             });
 
             StringBuilder builder = new StringBuilder();
@@ -75,30 +81,228 @@ public final class AutoParcelProcessor extends AbstractProcessor {
 
     private void addDefaultValuesToFields(Element elementField, String testClassInstanceName) {
         String className = getClassName(elementField);
-        if (className.contains(">")) {
+        if (className.contains("Parcelable")) {
             return;
+        } else if (className.contains("List") && className.contains("java.util")) {
+            checkAndAddStatement(toImport, "import java.util.List;");
+            checkAndAddStatement(toImport, "import java.util.ArrayList;");
+            className = getClassNameFromCast(className);
+            String packageName = getPackageName(className);
+            if (packageName.length() > 0) {
+                checkAndAddStatement(toImport, "import " + className+";");
+            }
+            checkAndAddStatement(defaultValueStatements, "List<"
+                    + getSimpleClassName(className)
+                    + ">"
+                    + " test"
+                    + getSimpleClassName(className)
+                    + "List = new ArrayList<>();"
+            );
+            /*defaultValueStatements.add("List<"
+                    + getSimpleClassName(className)
+                    + ">"
+                    + "test"
+                    + getSimpleClassName(className)
+                    + "List = new ArrayList<>();"
+            );*/
+            processSingleType(className, null, elementField.getSimpleName().toString());
+            checkAndAddStatement(defaultValueStatements,"test"
+                    + getSimpleClassName(className)
+                    + "List.add("
+                    + "test"
+                    + getSimpleClassName(className)
+                    + ");")
+            ;
+            /*defaultValueStatements.add("test"
+                    + getSimpleClassName(className)
+                    + "List.add("
+                    + "test"
+                    + getSimpleClassName(className)
+                    + ");"
+            );*/
+            /*defaultValueStatements.add(testClassInstanceName
+                    + ".set"
+                    + getSimpleClassName(className)
+                    + "List("
+                    + "test"
+                    + getSimpleClassName(className)
+                    + ");"
+            );*/
+            checkAndAddStatement(defaultValueStatements,
+                    testClassInstanceName
+                            + ".set"
+                            + getVariableName(elementField.getSimpleName().toString())
+                            + "("
+                            + "test"
+                            + getSimpleClassName(className)
+                            + "List);"
+            );
+        } else if(className.contains("Map")&& className.contains("java.util")) {
+                checkAndAddStatement(toImport, "import java.util.Map;");
+                checkAndAddStatement(toImport, "import java.util.HashMap;");
+                className = getClassNameFromCast(className);
+                className.replace(" ", "");
+                String[] classNames = className.split(",");
+                String testAdditions[] = new String[2];
+                checkAndAddStatement(defaultValueStatements, "Map<"
+                    + getSimpleClassName(classNames[0])
+                    + ", "
+                    + getSimpleClassName(classNames[1])
+                    + ">"
+                    + "test"
+                    + getSimpleClassName(classNames[0])
+                    + getSimpleClassName(classNames[1])
+                    + "Map = new HashMap<>();");
+
+                int count = 0;
+                for (String classNamePart : classNames) {
+                    String packageName = getPackageName(classNamePart);
+                    if (packageName.length() > 0) {
+                        checkAndAddStatement(toImport, "import " + classNamePart + ";");
+                        processSingleType(classNamePart, null, elementField.getSimpleName().toString());
+                        testAdditions[count] = "test"+getSimpleClassName(classNamePart);
+                    }
+                    else {
+                        processSingleType(classNamePart, testClassInstanceName, elementField.getSimpleName().toString());
+                    }
+                    count++;
+
+                /*defaultValueStatements.add("List<"
+                        + getSimpleClassName(className)
+                        + ">"
+                        + "test"
+                        + getSimpleClassName(className)
+                        + "List = new ArrayList<>();"
+                );*/
+                /*defaultValueStatements.add("test"
+                        + getSimpleClassName(className)
+                        + "List.add("
+                        + "test"
+                        + getSimpleClassName(className)
+                        + ");"
+                );*/
+                /*defaultValueStatements.add(testClassInstanceName
+                        + ".set"
+                        + getSimpleClassName(className)
+                        + "List("
+                        + "test"
+                        + getSimpleClassName(className)
+                        + ");"
+                );*/
+
+                }
+            checkAndAddStatement(defaultValueStatements, "test"
+                    + getSimpleClassName(classNames[0])
+                    + getSimpleClassName(classNames[1])
+                    + "Map.put("
+                    + (testAdditions[0])
+                    + ","
+                    + (testAdditions[1])
+                    + ");");
+            checkAndAddStatement(defaultValueStatements,
+                    testClassInstanceName
+                            + ".set"
+                            + getVariableName(elementField.getSimpleName().toString())
+                            + "("
+                            + "test"
+                            + getSimpleClassName(classNames[0])
+                            + getSimpleClassName(classNames[1])
+                            + "Map);");
+
+        } else if (className.contains("Set") && className.contains("java.util")) {
+            checkAndAddStatement(toImport, "import java.util.Set;");
+            checkAndAddStatement(toImport, "import java.util.HashSet;");
+            className = getClassNameFromCast(className);
+            String packageName = getPackageName(className);
+            if (packageName.length() > 0) {
+                checkAndAddStatement(toImport, "import " + className+";");
+            }
+            checkAndAddStatement(defaultValueStatements, "Set<"
+                    + getSimpleClassName(className)
+                    + ">"
+                    + " test"
+                    + getSimpleClassName(className)
+                    + "Set = new HashSet<>();"
+            );
+            /*defaultValueStatements.add("List<"
+                    + getSimpleClassName(className)
+                    + ">"
+                    + "test"
+                    + getSimpleClassName(className)
+                    + "List = new ArrayList<>();"
+            );*/
+            processSingleType(className, null, elementField.getSimpleName().toString());
+            checkAndAddStatement(defaultValueStatements,"test"
+                    + getSimpleClassName(className)
+                    + "Set.add("
+                    + "test"
+                    + getSimpleClassName(className)
+                    + ");")
+            ;
+            /*defaultValueStatements.add("test"
+                    + getSimpleClassName(className)
+                    + "List.add("
+                    + "test"
+                    + getSimpleClassName(className)
+                    + ");"
+            );*/
+            /*defaultValueStatements.add(testClassInstanceName
+                    + ".set"
+                    + getSimpleClassName(className)
+                    + "List("
+                    + "test"
+                    + getSimpleClassName(className)
+                    + ");"
+            );*/
+            checkAndAddStatement(defaultValueStatements,
+                    testClassInstanceName
+                            + ".set"
+                            + getVariableName(elementField.getSimpleName().toString())
+                            + "("
+                            + "test"
+                            + getSimpleClassName(className)
+                            + "Set);"
+            );
         }
-        String packageName = getPackageName(className);
-        if (packageName.length() > 0 && !("java.lang.String").equals(className)) {
-            toImport.add("import " + className+";");
+        else {
+            processSingleType(className, testClassInstanceName, elementField.getSimpleName().toString());
         }
 
+    }
+
+    public boolean checkAndAddStatement(List<String> list, String statement) {
+        if (!list.contains(statement)){
+            list.add(statement);
+            return true;
+        }
+        return false;
+    }
+
+    private void processSingleType(String className, String testClassInstanceName, String elementField) {
+        if (checkAndProcessWrapper(className, testClassInstanceName, elementField))
+            return;
         switch (className) {
             case "int":
                 String intField = testClassInstanceName
                         + ".set"
                         + getVariableName(elementField)
                         + "(1);";
-                defaultValueStatements.add(intField);
+                //defaultValueStatements.add(intField);
+                checkAndAddStatement(defaultValueStatements, intField);
                 break;
             case "java.lang.String":
                 String stringField = testClassInstanceName
                         + ".set"
                         + getVariableName(elementField)
                         + "(\"String\");";
-                defaultValueStatements.add(stringField);
+                //defaultValueStatements.add(stringField);
+                checkAndAddStatement(defaultValueStatements, stringField);
                 break;
             default:
+                String packageName = getPackageName(className);
+                if (packageName.length() > 0) {
+                    checkAndAddStatement(toImport, "import " + className+";");
+                }
                 String simpleClassName = getSimpleClassName(className);
                 String newStatement = simpleClassName
                         + " test"
@@ -108,21 +312,86 @@ public final class AutoParcelProcessor extends AbstractProcessor {
                         +  simpleClassName
                         + "();";
                 String testChildClassInstanceName = "test" + simpleClassName;
-                defaultValueStatements.add(newStatement);
+                //defaultValueStatements.add(newStatement);
+                checkAndAddStatement(defaultValueStatements, newStatement);
                 for (Element annotatedElement : annotatedElements) {
                     if (annotatedElement.getSimpleName().toString().equals(simpleClassName)) {
                         addDefaultValuesToFieldsForClass(annotatedElement, testChildClassInstanceName);
                     }
                 }
-                String objAssignment = testClassInstanceName
-                        + ".set"
-                        + simpleClassName
-                        + "("
-                        + testChildClassInstanceName
-                        + ");";
-                defaultValueStatements.add(objAssignment);
+                if (testClassInstanceName != null) {
+                    String objAssignment = testClassInstanceName
+                            + ".set"
+                            + getVariableName(elementField)
+                            + "("
+                            + testChildClassInstanceName
+                            + ");";
+                    //defaultValueStatements.add(objAssignment);
+                    checkAndAddStatement(defaultValueStatements, objAssignment);
+                }
                 break;
         }
+    }
+
+    private boolean checkAndProcessWrapper(String className, String testClassInstanceName, String elementField) {
+        /**
+         * NUMERICAL WRAPPERS
+         */
+        if (className.contains("Integer")) {
+            checkAndAddStatement(toImport, "import java.lang.Integer;");
+            checkAndAddStatement(defaultValueStatements, "Integer testInteger = new Integer(" + DEFAULT_NUMBER + ");");
+            return true;
+        } else if (className.contains("Long")) {
+            checkAndAddStatement(toImport, "import java.lang.Long;");
+            checkAndAddStatement(defaultValueStatements, "Long testLong = new Long(" + DEFAULT_NUMBER + ");");
+            return true;
+        } else if (className.contains("Short")) {
+            checkAndAddStatement(toImport, "import java.lang.Short;");
+            checkAndAddStatement(defaultValueStatements, "Short testShort = new Short(" + DEFAULT_NUMBER + ");");
+            return true;
+        } else if (className.contains("Byte")) {
+            checkAndAddStatement(toImport, "import java.lang.Byte;");
+            checkAndAddStatement(defaultValueStatements, "Byte testByte = new Byte(" + DEFAULT_NUMBER + ")");
+            return true;
+        } else if (className.contains("Float")) {
+            checkAndAddStatement(toImport, "import java.lang.Long;");
+            checkAndAddStatement(defaultValueStatements, "Float testFloat = new Float(" + DEFAULT_NUMBER + ");");
+            return true;
+        } else if (className.contains("Double")) {
+            checkAndAddStatement(toImport, "import java.lang.Long;");
+            checkAndAddStatement(defaultValueStatements, "Double testDouble = new Double(" + DEFAULT_NUMBER + ");");
+            return true;
+        }
+        /**
+         * Boolean
+         */
+        else if (className.contains("Boolean")) {
+            checkAndAddStatement(toImport, "import java.lang.Boolean;");
+            checkAndAddStatement(defaultValueStatements, "Boolean testBoolean = new Boolean(false);");
+            return true;
+        } else if (className.contains("Character")) {
+            checkAndAddStatement(toImport, "import java.lang.Character;");
+            checkAndAddStatement(defaultValueStatements, "Character testCharacter = new Character(" + DEFAULT_CHAR + "));");
+            return true;
+        } else if (className.contains("String")) {
+            checkAndAddStatement(toImport, "import java.lang.String;");
+            checkAndAddStatement(defaultValueStatements, "String testString = \"" + DEFAULT_STRING + "\";");
+            if (testClassInstanceName != null) {
+                String stringField = testClassInstanceName
+                        + ".set"
+                        + getVariableName(elementField)
+                        + "(testString);";
+                checkAndAddStatement(defaultValueStatements, stringField);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private String getClassNameFromCast(String className) {
+        int startIndex = className.indexOf("<");
+        int lastIndex = className.indexOf(">");
+        return className.substring(startIndex+1, lastIndex);
     }
 
 
@@ -156,10 +425,8 @@ public final class AutoParcelProcessor extends AbstractProcessor {
     }
 
 
-    private String getVariableName(Element elementField) {
-        String name = elementField.getSimpleName().toString();
-        String capName = name.substring(0, 1).toUpperCase() + name.substring(1);
-        return capName;
+    private String getVariableName(String name) {
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
 

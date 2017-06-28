@@ -5,6 +5,11 @@ import android.os.Parcelable;
 
 import com.example.AutoParcel;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,19 +23,35 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Something implements Parcelable {
 
+    ObjFields objFields;
+
+    Set<Integer> integerSet;
+
     int count;
 
-    ObjFields objFields;
+    String abc;
+
+    List<ObjFields> objFieldsList;
+
+    List<Integer> stuff;
+
+    List<String> strings;
+
+    Map<String, Integer> things;
+
+    Map<Integer, ObjFields> mapping;
 
     protected Something(Parcel in) {
         this.count = in.readInt();
         this.objFields = in.readParcelable(ObjFields.CREATOR.getClass().getClassLoader());
+        in.readTypedList(this.objFieldsList, ObjFields.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(count);
         dest.writeParcelable(objFields, 0);
+        dest.writeTypedList(objFieldsList);
     }
 
     @Override

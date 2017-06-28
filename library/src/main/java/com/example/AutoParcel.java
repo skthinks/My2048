@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE) // on class level
 @Retention(RetentionPolicy.SOURCE) // not needed at runtime
-public @interface AutoParcel {}
+public @interface AutoParcel {
+}
