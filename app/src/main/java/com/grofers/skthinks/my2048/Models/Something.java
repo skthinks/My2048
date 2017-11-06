@@ -17,7 +17,7 @@ import lombok.Setter;
 /**
  * Created by Skthinks on 18/11/16.
  */
-@AutoParcel
+@AutoParcel(isParcel = false)
 @Setter
 @Getter
 @NoArgsConstructor
