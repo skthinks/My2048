@@ -69,7 +69,9 @@ dependencies {
 
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.0.0'
 
+    // TESTING MODULES
+    debugCompile 'org.testng:testng:6.8.13'
+    compile 'junit:junit:4.12'
 
-    compile 'org.junit.jupiter:junit-jupiter-api'
-    compile 'org.junit.jupiter:junit-jupiter-api'
+
 }

@@ -3,9 +3,8 @@ package com.grofers.skthinks.my2048.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.AutoParcel;
+import com.example.GenerateTest;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +16,7 @@ import lombok.Setter;
 /**
  * Created by Skthinks on 18/11/16.
  */
-@AutoParcel(isParcel = false)
+@GenerateTest(usesParcellerAnnotation = false)
 @Setter
 @Getter
 @NoArgsConstructor

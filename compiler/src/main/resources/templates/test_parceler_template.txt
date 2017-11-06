@@ -6,6 +6,7 @@ package com.grofers.skthinks.annotations.generated;
 import android.os.Parcelable;
 
 import junit.framework.Assert;
+import com.grofers.skthinks.my2048.InstrumentationTestCommonLib;
 
 import org.junit.Test;
 import org.parceler.Parcels;

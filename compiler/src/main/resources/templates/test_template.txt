@@ -1,8 +1,13 @@
 package com.grofers.skthinks.annotations.generated;
 
+
 {{#imports}}
 {{.}}
 {{/imports}}
+import com.grofers.skthinks.my2048.InstrumentationTestCommonLib;
+import org.junit.Assert;
+import org.junit.Test;
+import android.os.Parcel;
 
 
 public class {{name}}Test {

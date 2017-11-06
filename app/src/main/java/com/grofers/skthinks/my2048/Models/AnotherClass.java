@@ -3,7 +3,7 @@ package com.grofers.skthinks.my2048.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.AutoParcel;
+import com.example.GenerateTest;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * Created by Skthinks on 28/06/17.
  */
-@AutoParcel(isParcel = false)
+@GenerateTest(usesParcellerAnnotation = false)
 @Setter
 @Getter
 @NoArgsConstructor
