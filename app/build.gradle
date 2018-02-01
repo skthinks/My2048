@@ -1,12 +1,10 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
-apply plugin: 'com.neenbedankt.android-apt'
 
 
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.grofers.skthinks.my2048"
         minSdkVersion 21
@@ -21,6 +19,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -30,20 +33,25 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:8.1.0'
-    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.1.0'
     compile 'com.android.support:design:25.0.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:25.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     compile 'org.parceler:parceler-api:1.1.5'
-    apt 'org.parceler:parceler:1.1.5'
+    annotationProcessor 'org.parceler:parceler:1.1.5'
 
     provided "org.projectlombok:lombok:1.12.6"
-    apt "org.projectlombok:lombok:1.12.6"
+    annotationProcessor "org.projectlombok:lombok:1.12.6"
 
     compile project(':library')
-    apt project(':compiler')
+    annotationProcessor project(':compiler')
+
+    testCompile "org.robolectric:robolectric:3.6.1"
+
 
     androidTestCompile 'org.mockito:mockito-core:1.9.5'
     androidTestCompile 'junit:junit:4.12'

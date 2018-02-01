@@ -15,10 +15,16 @@ import android.widget.Toast;
 
 import com.grofers.skthinks.my2048.Interfaces.ITwoButtonDialogListener;
 import com.grofers.skthinks.my2048.R;
+import com.grofers.skthinks.my2048.SampleApi;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Skthinks on 21/10/16.
@@ -154,5 +160,28 @@ public class SplasherActivity extends AppCompatActivity implements ITwoButtonDia
     @Override
     public void onClickNo() {
         showToast("No");
+    }
+
+    public void makeApiCall() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://www.alphavantage.co/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        SampleApi request = retrofit.create(SampleApi.class);
+        Call<Object> call = request.getMyJSON();
+        call.enqueue(new Callback<Object>() {
+
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                Object jsonResponse = response.body();
+                System.out.print("AFASJDASJDSA");
+            }
+
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+                System.out.print("PAKSFPAKSFAS");
+            }
+        });
     }
 }
