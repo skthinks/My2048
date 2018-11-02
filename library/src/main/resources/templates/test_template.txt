@@ -1,0 +1,52 @@
+package com.grofers.skthinks.annotations.generated;
+
+
+{{#imports}}
+{{.}}
+{{/imports}}
+import com.grofers.skthinks.my2048.InstrumentationTestCommonLib;
+import org.junit.Assert;
+import org.junit.Test;
+import android.os.Parcel;
+
+
+public class {{name}}Test {
+
+    @Test
+    public void test{{name}}() {
+        {{name}} test{{name}} = new {{name}}();
+
+        // Obtain a Parcel object and write the parcelable object to it:
+        Parcel parcel = Parcel.obtain();
+        test{{name}}.writeToParcel(parcel,0);
+
+        // After you're done with writing, you need to reset the parcel for reading:
+        parcel.setDataPosition(0);
+
+        // Reconstruct object from parcel and asserts:
+        {{name}} createdFromParcel = {{name}}.CREATOR.createFromParcel(parcel);
+
+        Assert.assertEquals(test{{name}}, createdFromParcel);
+    }
+
+    @Test
+    public void test{{name}}Params() {
+        {{name}} test{{name}} = new {{name}}();
+		{{#defaultInstanceValues}}
+		{{.}}
+		{{/defaultInstanceValues}}
+
+
+        // Obtain a Parcel object and write the parcelable object to it:
+        Parcel parcel = Parcel.obtain();
+        test{{name}}.writeToParcel(parcel,0);
+
+        // After you're done with writing, you need to reset the parcel for reading:
+        parcel.setDataPosition(0);
+
+        // Reconstruct object from parcel and asserts:
+        {{name}} createdFromParcel = {{name}}.CREATOR.createFromParcel(parcel);
+
+        Assert.assertEquals(test{{name}}, createdFromParcel);
+    }
+}

@@ -19,6 +19,7 @@ import lombok.Setter;
 public class AnotherClass implements Parcelable {
 
     int arsenal;
+    int spurs;
 
     protected AnotherClass(Parcel in) {
         arsenal = in.readInt();

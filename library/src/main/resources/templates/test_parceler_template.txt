@@ -1,0 +1,42 @@
+package com.grofers.skthinks.annotations.generated;
+
+{{#imports}}
+{{.}}
+{{/imports}}
+import android.os.Parcelable;
+
+import junit.framework.Assert;
+import com.grofers.skthinks.my2048.InstrumentationTestCommonLib;
+
+import org.junit.Test;
+import org.parceler.Parcels;
+
+/**
+ * Created by Skthinks on 20/02/17.
+ */
+
+public class {{name}}Test {
+
+    @Test
+    public void test{{name}}() {
+        {{name}} test{{name}} = new {{name}}();
+        Parcelable wrapped = Parcels.wrap(test{{name}});
+        {{name}} fromParcel = Parcels.unwrap(wrapped);
+
+        Assert.assertEquals(test{{name}} , fromParcel);
+    }
+
+    @Test
+    public void test{{name}}Params() {
+        {{name}} test{{name}} = new {{name}}();
+		{{#defaultInstanceValues}}
+		{{.}}
+		{{/defaultInstanceValues}}
+
+        Parcelable wrapped = Parcels.wrap(test{{name}});
+        {{name}} fromParcel = Parcels.unwrap(wrapped);
+
+        Assert.assertEquals(test{{name}}, fromParcel);
+    }
+
+}
